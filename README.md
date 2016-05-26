@@ -14,7 +14,7 @@ A puppet recipe to install SonarQube (former Sonar)
 
     class { 'java': }
     class { 'sonarqube':
-      version => '5.1',
+      version => '5.5',
     }
 
 or
@@ -26,17 +26,11 @@ or
     }
 
     class { 'sonarqube':
-      arch          => 'linux-x86-64',
-      version       => '5.1,
+      version       => '5.5,
       user          => 'sonar',
       group         => 'sonar',
-      service       => 'sonar',
-      installroot   => '/usr/local',
-      home          => '/var/local/sonar',
-      download_url  => 'https://sonarsource.bintray.com/Distribution/sonarqube'
       jdbc          => $jdbc,
       web_java_opts => '-Xmx1024m',
-      log_folder    => '/var/local/sonar/logs',
       updatecenter  => 'true',
       http_proxy    => {
       	host        => 'proxy.example.com',
@@ -55,14 +49,14 @@ The `sonarqube::plugin` defined type can be used to install SonarQube plugins. N
     class { 'maven::maven': }
     ->
     class { 'sonarqube': }
-    
+
     sonarqube::plugin { 'sonar-javascript-plugin':
       groupid    => 'org.sonarsource.javascript',
       artifactid => 'sonar-javascript-plugin',
       version    => '2.10',
       notify     => Service['sonar'],
     }
-    
+
 
 ## Security Configuration
 
